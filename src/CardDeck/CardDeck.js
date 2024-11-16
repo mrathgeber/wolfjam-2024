@@ -8,7 +8,7 @@ const Deck = {
       return CardDeck;
    },
    //creates a card
-   async initCard(app, dialogue) {
+   async initCard(app, cardData) {
       const card = new PIXI.Container();
       const cardWidth = 300;
       const cardHeight = 400;
@@ -17,15 +17,13 @@ const Deck = {
 
       const startCardX = (app.screen.width - cardWidth) / 2;
       const startCardY = (app.screen.height - cardHeight) / 2;
-      
-
 
       const cardBG = new PIXI.Graphics();
       cardBG.roundRect(startCardX, startCardY, cardWidth, cardHeight, 20);
       cardBG.fill('white');
       card.addChild(cardBG);
 
-      const content = new PIXI.Text({text: dialogue, style: {fontSize: 12, fill: 0x0000FF, wordWrap: true, wordWrapWidth: 200, }});
+      const content = new PIXI.Text({text: cardData.dialogue, style: {fontSize: 12, fill: 0x0000FF, wordWrap: true, wordWrapWidth: 200, }});
       // content.anchor.set(0.5);
       // content.position.set((cardBG.width + content.width) / 2, (cardBG.height + content.height)/ 2);
       
