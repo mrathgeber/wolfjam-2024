@@ -1,5 +1,5 @@
 {
-    "CardData":
+    "Play":
     [
         {   
             "CardName": "Scientist",
@@ -42,5 +42,16 @@
             "ImageSrc": "",
             "Scenerio": ""
         }
+    ],
+
+    "Origin" : 
+    [
+        {   
+            "CardName": "O1",
+            "ImageSrc": "../../textures/Scientist.jpg",
+            "Scenerio": "4 friends were planning their Hackathon",
+            "Location": "Hackathon"
+        }
     ]
+    
 }

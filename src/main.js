@@ -60,6 +60,16 @@ import { initBg } from './Location/location.js';
   playButtonContainer.addChild(playButton);
   playButtonContainer.addChild(playText);
 
+  /* --------Play Origin Story-------- */
+
+  await initBg(app, 0);
+
+  const CardDeck = Deck.initCardDeck();
+  app.stage.addChild(CardDeck);
+
+  let deckSize = 60;
+  startCardDeck(deckSize, app, CardDeck, "Origin");
+
   /* ---------- Start Game Mouse Events ---------- */
 
   playButtonContainer.interactive = true;
@@ -81,7 +91,7 @@ import { initBg } from './Location/location.js';
     app.stage.addChild(CardDeck);
 
     let deckSize = 60;
-    startCardDeck(deckSize, app, CardDeck);
+    startCardDeck(deckSize, app, CardDeck, "Play");
   });
 })();
 
@@ -89,7 +99,7 @@ async function startCardDeck(deckSize, app, CardDeck) {
   CardDeck.visible = true;
 
   for (let i = 0; i < deckSize; i++) {
-    const card = await Deck.initCard(app, deckSize - i);
+    const card = await Deck.initCard(app, deckSize - i, deck_name);
     CardDeck.addChild(card);
   }
 }
