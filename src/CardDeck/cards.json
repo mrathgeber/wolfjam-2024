@@ -1,73 +1,82 @@
 {
    "locations": {
-      "backstory": [
-         {
-            "depth": 0,
-            "character": "friend-name",
-            "image_file_path": "../../textures/char1.png",
-            "dialogue": "Hey 'player-name', I have this crazy new idea for a game... Do you want to develop it with me?",
-            "response1": "I'm down bro",
-            "response2": "Let's do it"
-         },
-         {
-            "depth": 0,
-            "character": "Backstory",
-            "image_file_path": "../../textures/char1.png",
-            "dialogue": "You and 'friend-name' spend the next two months developing an intricate video game world in virtual reality...",
-            "response1": "",
-            "response2": ""
-         },
-         {
-            "depth": 0,
-            "character": "friend-name",
-            "image_file_path": "../../textures/char1.png",
-            "dialogue": "Check out this new feature I added. I'm telling you, VR is the future of gaming.",
-            "response1": "Cool",
-            "response2": "How does it work?"
-         },
-         {
-            "depth": 0,
-            "character": "friend-name",
-            "image_file_path": "../../textures/char1.png",
-            "dialogue": "Something's wrong...",
-            "response1": "...",
-            "response2": "What's happening?"
-         },
-         {
-            "depth": 0,
-            "character": "Backstory",
-            "image_file_path": "../../textures/char1.png",
-            "dialogue": "Your game's system malfunctions, trapping you and 'friend-name' in the world of the game.",
-            "response1": "",
-            "response2": ""
-         },
-         {
-            "depth": 0,
-            "character": "Backstory",
-            "image_file_path": "../../textures/char1.png",
-            "dialogue": "'friend-name' exists in the game as one of the characters you created. To get home you must identify them without appearing suspicious to the other NPCs in the game...",
-            "response1": "",
-            "response2": ""
-         }
-      ],
-      "town": [
-         {
-            "depth": 1,
-            "character": "Shopkeeper Todd",
-            "dialogue": "Can I interest you in some freshly picked blackberries?",
-            "response1": "Yes",
-            "response2": "No"
-         }
-      ],
-      "cave": [
-         {
-            "depth": 1,
-            "character": "Goblin Roy",
-            "dialogue": "",
-            "response1": "",
-            "response2": ""
-         }
-      ]
+      "backstory": {
+         "bgImage": "../../backgrounds/town.jpg",
+         "cards": [
+            {
+               "depth": 0,
+               "character": "friend-name",
+               "image_file_path": "../../textures/char1.png",
+               "dialogue": "Hey 'player-name', I have this crazy new idea for a game... Do you want to develop it with me?",
+               "response1": "I'm down bro",
+               "response2": "Let's do it"
+            },
+            {
+               "depth": 0,
+               "character": "Backstory",
+               "image_file_path": "../../textures/char1.png",
+               "dialogue": "You and 'friend-name' spend the next two months developing an intricate video game world in virtual reality...",
+               "response1": "",
+               "response2": ""
+            },
+            {
+               "depth": 0,
+               "character": "friend-name",
+               "image_file_path": "../../textures/char1.png",
+               "dialogue": "Check out this new feature I added. I'm telling you, VR is the future of gaming.",
+               "response1": "Cool",
+               "response2": "How does it work?"
+            },
+            {
+               "depth": 0,
+               "character": "friend-name",
+               "image_file_path": "../../textures/char1.png",
+               "dialogue": "Something's wrong...",
+               "response1": "...",
+               "response2": "What's happening?"
+            },
+            {
+               "depth": 0,
+               "character": "Backstory",
+               "image_file_path": "../../textures/char1.png",
+               "dialogue": "Your game's system malfunctions, trapping you and 'friend-name' in the world of the game.",
+               "response1": "",
+               "response2": ""
+            },
+            {
+               "depth": 0,
+               "character": "Backstory",
+               "image_file_path": "../../textures/char1.png",
+               "dialogue": "'friend-name' exists in the game as one of the characters you created. To get home you must identify them without appearing suspicious to the other NPCs in the game...",
+               "response1": "",
+               "response2": ""
+            }
+         ]
+      },
+      "town": {
+         "bgImage": "../../backgrounds/town.jpg",
+         "cards": [
+            {
+               "depth": 1,
+               "character": "Shopkeeper Dwight",
+               "dialogue": "Can I interest you in some freshly picked blackberries?",
+               "response1": "Yes",
+               "response2": "No"
+            }
+         ]
+      },
+      "ocean": {
+         "bgImage": "../../backgrounds/Ocean.jpg",
+         "cards": [
+            {
+               "depth": 1,
+               "character": "Mermaid Leila",
+               "dialogue": "......",
+               "response1": "Yes",
+               "response2": "No"
+            }
+         ]
+      }
    }
 }
  

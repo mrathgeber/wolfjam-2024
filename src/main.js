@@ -64,13 +64,13 @@ import cards from './CardDeck/cards.json' assert { type: 'json' };
 
   /* --------Play Origin Story-------- */
 
-  await initBg(app, 0);
+  // await initBg(app, 0);
 
-  const CardDeck = Deck.initCardDeck();
-  app.stage.addChild(CardDeck);
+  // const CardDeck = Deck.initCardDeck();
+  // app.stage.addChild(CardDeck);
 
-  let deckSize = 60;
-  startCardDeck(deckSize, app, CardDeck, "Origin");
+  // let deckSize = 60;
+  // startCardDeck(deckSize, app, CardDeck);
 
   /* ---------- Start Game Mouse Events ---------- */
 
@@ -93,7 +93,7 @@ import cards from './CardDeck/cards.json' assert { type: 'json' };
     app.stage.addChild(CardDeck);
 
     let deckSize = 60;
-    startCardDeck(deckSize, app, CardDeck, "Play");
+    startCardDeck(deckSize, app, CardDeck);
   });
 })();
 
@@ -101,16 +101,12 @@ async function startCardDeck(deckSize, app, CardDeck) {
   CardDeck.visible = true;
   let deck_name = "";
 
-  const backstoryCards = cards.locations.backstory;
-  console.log(backstoryCards.length);
+  const backstoryImage = cards.locations.backstory.bgImage;
+  const backstoryCards = cards.locations.backstory.cards;
 
   for (let i = 0; i < backstoryCards.length; i++) {
-    const card = await Deck.initCard(app, backstoryCards[backstoryCards.length - 1 - i].dialogue);
+    const backstoryCard = backstoryCards[backstoryCards.length - 1 - i];
+    const card = await Deck.initCard(app, backstoryCard.dialogue);
     CardDeck.addChild(card);
   }
-
-  // for (let i = 0; i < deckSize; i++) {
-  //   const card = await Deck.initCard(app, deckSize - i);
-  //   CardDeck.addChild(card);
-  // }
 }
