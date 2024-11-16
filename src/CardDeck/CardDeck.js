@@ -37,6 +37,8 @@ const Deck = {
       content.y = app.screen.height / 2 - content.height / 2 - 150;
       card.addChild(content);
       
+
+
       await PIXI.Assets.load('../../textures/char1.png');
       const character = PIXI.Sprite.from('../../textures/char1.png');
       character.x = app.screen.width / 2 - character.width / 2;
@@ -97,16 +99,16 @@ const Deck = {
             let width = 30;
             let height = cardHeight;
             let radius = 20
-            if (decision > 0) {
-               overlayBG.moveTo(x + 20, y);
-               overlayBG.arcTo(x + cardWidth, y, x + cardWidth, y + 20, 20);
-               overlayBG.lineTo(x + width, y + height);
-               overlayBG.lineTo(x, y + height);
-               overlayBG.lineTo(x, y + radius);
-               overlayBG.arcTo(x, y, x + radius, y, radius);
-            } else {
+            // if (decision > 0) {
+            overlayBG.moveTo(x + 20, y);
+            overlayBG.arcTo(x + cardWidth, y, x + cardWidth, y + 20, 20);
+            overlayBG.lineTo(x + width, y + height);
+            overlayBG.lineTo(x, y + height);
+            overlayBG.lineTo(x, y + radius);
+            overlayBG.arcTo(x, y, x + radius, y, radius);
+            // } else {
                
-            }
+            // }
 
 
 
@@ -161,7 +163,6 @@ const Deck = {
       const swipeSpeed = 10;
 
 
-
       // Animate card position
       overlay.visible = false;
 
@@ -179,6 +180,7 @@ const Deck = {
             app.stage.removeChild(overlay);
             // Optionally, create a new card or trigger an event here
          }
+
       });
    },
    animateResetPosition(app, card) {
