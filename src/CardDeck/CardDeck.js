@@ -33,12 +33,10 @@ const Deck = {
       content.y = app.screen.height / 2 - content.height / 2 - 150;
       card.addChild(content);
 
-
-      const texture = await Deck.getImage("https://pixijs.com/assets/bunny.png");
-      const character = new PIXI.Sprite(texture);
+      await PIXI.Assets.load('../../textures/char1.png');
+      const character = PIXI.Sprite.from('../../textures/char1.png');
       character.x = app.screen.width / 2 - character.width / 2;
       character.y = app.screen.height / 2 - character.height / 2;
-      character.scale.set(4);
       card.addChild(character);
       
       
@@ -125,10 +123,6 @@ const Deck = {
             card.rotation = 0;
          }
       });
-   },
-   async getImage(url) {
-      const texture = await PIXI.Assets.load(url)
-      return texture;
    }
 };
 
