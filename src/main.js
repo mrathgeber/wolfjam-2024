@@ -9,7 +9,7 @@ import { initPlayButton } from './StartContainer/PlayButton/PlayButton.js';
 import { initPlayText } from './StartContainer/PlayButton/PlayText.js';
 
 import Deck from './CardDeck/CardDeck.js';
-import { initBg } from 'location.js';
+import { initBg } from './Location/location.js';
 
 (async () => {
   const app = new PIXI.Application();
@@ -72,10 +72,10 @@ import { initBg } from 'location.js';
     app.canvas.style.cursor = 'default';
   });
 
-  playButtonContainer.on('pointerdown', () => {
+  playButtonContainer.on('pointerdown', async () => {
     app.stage.removeChild(StartContainer);
 
-    initBg(app, 0);
+    await initBg(app, 0);
 
     const CardDeck = Deck.initCardDeck();
     app.stage.addChild(CardDeck);

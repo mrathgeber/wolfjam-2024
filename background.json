@@ -2,7 +2,7 @@
     "Backgrounds" :
     [
         {
-            "ImageSrc" : "./Backgrounds/town.jpg",
+            "ImageSrc" : "../../backgrounds/town.jpg",
             "BgName" : "Town"
         }
     ]
