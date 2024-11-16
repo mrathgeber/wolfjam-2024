@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
 
 export function initTitleText(app, textStyle) {
-   const text = new PIXI.Text({text: 'TimeLine', style: textStyle});
+   const text = new PIXI.Text({text: 'GameX!!!', style: textStyle});
    text.alpha = 0.65;
    text.x = 0;
    text.y = -50;
