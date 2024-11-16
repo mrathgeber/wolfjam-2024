@@ -38,6 +38,7 @@ const Deck = {
       character.x = app.screen.width / 2 - character.width / 2;
       character.y = app.screen.height / 2 - character.height / 2;
       card.addChild(character);
+
       
       
       /* *** */

@@ -9,6 +9,7 @@ import { initPlayButton } from './StartContainer/PlayButton/PlayButton.js';
 import { initPlayText } from './StartContainer/PlayButton/PlayText.js';
 
 import Deck from './CardDeck/CardDeck.js';
+import { initBg } from 'location.js';
 
 (async () => {
   const app = new PIXI.Application();
@@ -73,6 +74,8 @@ import Deck from './CardDeck/CardDeck.js';
 
   playButtonContainer.on('pointerdown', () => {
     app.stage.removeChild(StartContainer);
+
+    initBg(app, 0);
 
     const CardDeck = Deck.initCardDeck();
     app.stage.addChild(CardDeck);
