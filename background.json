@@ -1,0 +1,9 @@
+{
+    "Backgrounds" :
+    [
+        {
+            "ImageSrc" : "./",
+            "BgName" : "Town"
+        }
+    ]
+}

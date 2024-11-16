@@ -1,0 +1,46 @@
+{
+    "CardData":
+    [
+        {   
+            "CardName": "Scientist",
+            "ImageSrc": "",
+            "Scenerio": "",
+            "Location": ""
+        },
+        {   
+            "CardName": "Mermaid",
+            "ImageSrc": "",
+            "Scenerio": ""
+        },
+        {   
+            "CardName": "Shark",
+            "ImageSrc": "",
+            "Scenerio": ""
+        },
+        {   
+            "CardName": "Ogre",
+            "ImageSrc": "",
+            "Scenerio": ""
+        },
+        {   
+            "CardName": "Witch",
+            "ImageSrc": "",
+            "Scenerio": ""
+        },
+        {   
+            "CardName": "Dog",
+            "ImageSrc": "",
+            "Scenerio": ""
+        },
+        {   
+            "CardName": "Shark",
+            "ImageSrc": "",
+            "Scenerio": ""
+        },
+        {   
+            "CardName": "Ogre",
+            "ImageSrc": "",
+            "Scenerio": ""
+        }
+    ]
+}
