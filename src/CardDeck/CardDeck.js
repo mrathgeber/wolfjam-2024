@@ -8,11 +8,7 @@ const Deck = {
       return CardDeck;
    },
    //creates a card
-<<<<<<< Updated upstream
-   async initCard(app, num, deck_name) {
-=======
    async initCard(app, dialogue) {
->>>>>>> Stashed changes
       const card = new PIXI.Container();
       const cardWidth = 300;
       const cardHeight = 400;
