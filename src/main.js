@@ -93,7 +93,7 @@ import cards from './CardDeck/cards.json' assert { type: 'json' };
     app.stage.addChild(CardDeck);
 
     let deckSize = 60;
-    startCardDeck(deckSize, app, CardDeck, "Play");
+    startCardDeck(deckSize, app, CardDeck);
   });
 })();
 
@@ -105,7 +105,8 @@ async function startCardDeck(deckSize, app, CardDeck) {
   console.log(backstoryCards.length);
 
   for (let i = 0; i < backstoryCards.length; i++) {
-    const card = await Deck.initCard(app, backstoryCards[backstoryCards.length - 1 - i].dialogue);
+    const backstoryCard = backstoryCards.cards[backstoryCards.length - 1 - i];
+    const card = await Deck.initCard(app, backstoryCard.dialogue);
     CardDeck.addChild(card);
   }
 

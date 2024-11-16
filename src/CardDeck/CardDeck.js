@@ -8,9 +8,7 @@ const Deck = {
       return CardDeck;
    },
    //creates a card
-
-   async initCard(app, num, deck_name, id) {
-
+   async initCard(app, dialogue, background) {
       const card = new PIXI.Container();
       const cardWidth = 300;
       const cardHeight = 400;
@@ -34,11 +32,7 @@ const Deck = {
       content.x = app.screen.width / 2 - content.width / 2;
       content.y = app.screen.height / 2 - content.height / 2 - 150;
       card.addChild(content);
-
-      let response = await fetch("../../card-data.json");
-      let data = await response.json();
       
-      let background = data.deck_name[id].ImageSrc;
       await PIXI.Assets.load(background);
       const bg = PIXI.Sprite.from(background);
       bg.width = app.screen.width;
