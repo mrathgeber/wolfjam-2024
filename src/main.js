@@ -97,6 +97,7 @@ import { initBg } from './Location/location.js';
 
 async function startCardDeck(deckSize, app, CardDeck) {
   CardDeck.visible = true;
+  let deck_name = "";
 
   for (let i = 0; i < deckSize; i++) {
     const card = await Deck.initCard(app, deckSize - i, deck_name);
