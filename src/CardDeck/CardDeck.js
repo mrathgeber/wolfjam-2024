@@ -8,7 +8,11 @@ const Deck = {
       return CardDeck;
    },
    //creates a card
+<<<<<<< Updated upstream
    async initCard(app, num, deck_name) {
+=======
+   async initCard(app, dialogue) {
+>>>>>>> Stashed changes
       const card = new PIXI.Container();
       const cardWidth = 300;
       const cardHeight = 400;
@@ -25,7 +29,7 @@ const Deck = {
       cardBG.fill('white');
       card.addChild(cardBG);
 
-      const content = new PIXI.Text({text: "Card #" + num, style: {fontSize: 24, fill: 0x0000FF }});
+      const content = new PIXI.Text({text: dialogue, style: {fontSize: 12, fill: 0x0000FF, wordWrap: true, wordWrapWidth: 200, }});
       // content.anchor.set(0.5);
       // content.position.set((cardBG.width + content.width) / 2, (cardBG.height + content.height)/ 2);
       
