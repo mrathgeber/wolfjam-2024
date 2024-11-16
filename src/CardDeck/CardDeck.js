@@ -8,11 +8,9 @@ const Deck = {
       return CardDeck;
    },
    //creates a card
-<<<<<<< HEAD
+
    async initCard(app, num, deck_name, id) {
-=======
-   async initCard(app, dialogue) {
->>>>>>> a5cecc7ca2657f3220a7843480bafd4f07036a59
+
       const card = new PIXI.Container();
       const cardWidth = 300;
       const cardHeight = 400;
