@@ -11,6 +11,8 @@ import { initPlayText } from './StartContainer/PlayButton/PlayText.js';
 import Deck from './CardDeck/CardDeck.js';
 import { initBg } from './Location/location.js';
 
+import cards from './CardDeck/cards.json' assert { type: 'json' };
+
 (async () => {
   const app = new PIXI.Application();
 
@@ -99,8 +101,16 @@ async function startCardDeck(deckSize, app, CardDeck) {
   CardDeck.visible = true;
   let deck_name = "";
 
-  for (let i = 0; i < deckSize; i++) {
-    const card = await Deck.initCard(app, deckSize - i, deck_name);
+  const backstoryCards = cards.locations.backstory;
+  console.log(backstoryCards.length);
+
+  for (let i = 0; i < backstoryCards.length; i++) {
+    const card = await Deck.initCard(app, backstoryCards[backstoryCards.length - 1 - i].dialogue);
     CardDeck.addChild(card);
   }
+
+  // for (let i = 0; i < deckSize; i++) {
+  //   const card = await Deck.initCard(app, deckSize - i);
+  //   CardDeck.addChild(card);
+  // }
 }
