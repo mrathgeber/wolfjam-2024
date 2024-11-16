@@ -17,7 +17,7 @@ const Deck = {
 
       const startCardX = (app.screen.width - cardWidth) / 2;
       const startCardY = (app.screen.height - cardHeight) / 2;
-      
+
 
 
       const cardBG = new PIXI.Graphics();
@@ -25,14 +25,14 @@ const Deck = {
       cardBG.fill('white');
       card.addChild(cardBG);
 
-      const content = new PIXI.Text({text: dialogue, style: {fontSize: 12, fill: 0x0000FF, wordWrap: true, wordWrapWidth: 200, }});
+      const content = new PIXI.Text({ text: dialogue, style: { fontSize: 12, fill: 0x0000FF, wordWrap: true, wordWrapWidth: 200, } });
       // content.anchor.set(0.5);
       // content.position.set((cardBG.width + content.width) / 2, (cardBG.height + content.height)/ 2);
-      
+
       content.x = app.screen.width / 2 - content.width / 2;
       content.y = app.screen.height / 2 - content.height / 2 - 150;
       card.addChild(content);
-      
+
       // await PIXI.Assets.load(background);
       // const bg = PIXI.Sprite.from(background);
       // bg.width = app.screen.width;
@@ -45,8 +45,8 @@ const Deck = {
       character.y = app.screen.height / 2 - character.height / 2;
       card.addChild(character);
 
-      
-      
+
+
       /* *** */
 
       let startX = 0;
@@ -74,6 +74,63 @@ const Deck = {
          card.x += deltaX;
          // card.rotation = deltaX / 500;  // Rotate slightly based on movement
          startX = event.global.x;
+         const direction = card.x > 0 ? 1 : -1;
+
+         if (Math.abs(card.x) > 50) {
+            const childGraphic = card.getChildByLabel("decision");
+            const childText = card.getChildByLabel("text");
+            if (childGraphic !== "null") {
+               card.removeChild(childGraphic);
+               card.removeChild(childText);
+            }
+
+            const overlayBG = new PIXI.Graphics();
+
+            overlayBG.label = "decision";
+            let x = app.screen.width / 2 - cardWidth / 2;
+            let y = app.screen.height / 2 - cardHeight + 200;
+            let width = 30;
+            let height = cardHeight;
+            let radius = 20
+            if (decision > 0) {
+               overlayBG.moveTo(x + 20, y);
+               overlayBG.arcTo(x + cardWidth, y, x + cardWidth, y + 20, 20);
+               overlayBG.lineTo(x + width, y + height);
+               overlayBG.lineTo(x, y + height);
+               overlayBG.lineTo(x, y + radius);
+               overlayBG.arcTo(x, y, x + radius, y, radius);
+            } else {
+               
+            }
+
+
+
+            overlayBG.fill("black");
+            overlayBG.alpha = 0.1;
+            card.addChild(overlayBG);
+
+
+            const overlayText = new PIXI.Text({
+               text: direction > 0 ? "Yes" : "No",
+               style:
+               {
+                  fontSize: 20,
+                  fill: 0x000000,
+                  align: 'center',
+                  fontWeight: 'bold',
+               }
+            });
+
+            overlayText.label = "text";
+
+            if (direction > 0) {
+               overlayText.x = app.screen.width / 2 + width / 2 - 45;
+            } else {
+               overlayText.x = app.screen.width / 2 - width / 2 + 10;
+            }
+            overlayText.y = app.screen.height / 2 - height * 2 + 10;
+            card.addChild(overlayText);
+         }
       });
 
       // Pointer up event
@@ -98,10 +155,12 @@ const Deck = {
       const targetRotation = direction > 0 ? 0.3 : -0.3; // Tilt angle (in radians)
       const swipeSpeed = 10;
 
+
+
       // Animate card position
       app.ticker.add(function swipeOff() {
          card.x += direction * swipeSpeed;
-         card.y += 2
+         card.y += 2;
          // card.rotation += direction * 0.005;
 
          // Remove card when it goes off-screen
@@ -114,6 +173,12 @@ const Deck = {
       });
    },
    animateResetPosition(app, card) {
+      const childGraphic = card.getChildByLabel("decision");
+      const childText = card.getChildByLabel("text");
+      if (childGraphic !== "null") {
+         card.removeChild(childGraphic);
+         card.removeChild(childText);
+      }
       const startX = card.x;
       const startRotation = card.rotation;
       const duration = 15;

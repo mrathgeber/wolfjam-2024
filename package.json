@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "@pixi/assets": "^7.4.2",
+    "@pixi/core": "^7.4.2",
     "@pixi/devtools": "^2.0.1",
     "pixi.js": "^8.5.2"
   },
