@@ -17,33 +17,29 @@ const Deck = {
 
       const startCardX = (app.screen.width - cardWidth) / 2;
       const startCardY = (app.screen.height - cardHeight) / 2;
-
       const cardBG = new PIXI.Graphics();
       cardBG.roundRect(startCardX, startCardY, cardWidth, cardHeight, 20);
-      cardBG.fill('white');
+      cardBG.fill('0xC4A484');
       card.addChild(cardBG);
 
-      const content = new PIXI.Text({text: cardData.dialogue, style: {fontSize: 12, fill: 0x0000FF, wordWrap: true, wordWrapWidth: 200, }});
-      // content.anchor.set(0.5);
-      // content.position.set((cardBG.width + content.width) / 2, (cardBG.height + content.height)/ 2);
-      
+      const overlay = new PIXI.Graphics();
+      overlay.roundRect(startCardX, startCardY, cardWidth, cardHeight, 20);
+      overlay.fill('0x51372A');
+      overlay.visible = false;
+      app.stage.addChild(overlay);
+
+      const content = new PIXI.Text({text: dialogue, style: {fontSize: 12, fill: 0x0000FF, wordWrap: true, wordWrapWidth: 200, }});
+     
       content.x = app.screen.width / 2 - content.width / 2;
       content.y = app.screen.height / 2 - content.height / 2 - 150;
       card.addChild(content);
       
-      // await PIXI.Assets.load(background);
-      // const bg = PIXI.Sprite.from(background);
-      // bg.width = app.screen.width;
-      // bg.height = app.screen.height;
-      // app.stage.addChild(bg);
-
       await PIXI.Assets.load('../../textures/char1.png');
       const character = PIXI.Sprite.from('../../textures/char1.png');
       character.x = app.screen.width / 2 - character.width / 2;
       character.y = app.screen.height / 2 - character.height / 2;
       card.addChild(character);
 
-      
       
       /* *** */
 
@@ -65,12 +61,21 @@ const Deck = {
       card.on('pointerdown', (event) => {
          startX = event.global.x;
          isDragging = true;
+
+         overlay.visible = true;
+
+         //ensures that overlay is not covering current card
+         app.stage.addChild(overlay);
+         app.stage.addChild(card);
+         
+         app.stage.setChildIndex(overlay, app.stage.children.length - 2); 
+         app.stage.setChildIndex(card, app.stage.children.length - 1); 
       });
       card.on('pointermove', (event) => {
          if (!isDragging) return;
          const deltaX = event.global.x - startX;
          card.x += deltaX;
-         // card.rotation = deltaX / 500;  // Rotate slightly based on movement
+
          startX = event.global.x;
       });
 
@@ -82,7 +87,7 @@ const Deck = {
          if (Math.abs(card.x) > 150) {
             // Swipe left or right
             const direction = card.x > 0 ? 1 : -1;
-            Deck.animateSwipeOff(app, card, direction);
+            Deck.animateSwipeOff(app, card, direction, overlay);
          } else {
             // Return to center if swipe wasn't strong enough
             Deck.animateResetPosition(app, card);
@@ -91,15 +96,18 @@ const Deck = {
 
       return card;
    },
-   animateSwipeOff(app, card, direction) {
+   animateSwipeOff(app, card, direction, overlay) {
       const targetX = direction > 0 ? app.screen.width + card.width : app.screen.width - card.width;
       const targetRotation = direction > 0 ? 0.3 : -0.3; // Tilt angle (in radians)
       const swipeSpeed = 10;
 
       // Animate card position
+      overlay.visible = false;
+
       app.ticker.add(function swipeOff() {
          card.x += direction * swipeSpeed;
          card.y += 2
+
          // card.rotation += direction * 0.005;
 
          // Remove card when it goes off-screen
@@ -107,6 +115,7 @@ const Deck = {
             (direction < 0 && card.x < -app.screen.width)) {
             app.ticker.remove(swipeOff);
             app.stage.removeChild(card);
+            app.stage.removeChild(overlay);
             // Optionally, create a new card or trigger an event here
          }
       });
