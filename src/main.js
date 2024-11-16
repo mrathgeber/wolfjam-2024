@@ -99,6 +99,7 @@ import cards from './CardDeck/cards.json' assert { type: 'json' };
 
 async function startCardDeck(deckSize, app, CardDeck) {
   CardDeck.visible = true;
+  let deck_name = "";
 
   const backstoryCards = cards.locations.backstory;
   console.log(backstoryCards.length);
