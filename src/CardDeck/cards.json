@@ -4,7 +4,7 @@
          "bgImage": "../../backgrounds/Classroom.jpg",
          "cards": [
             {
-               "depth": 0,
+               "depth": -1,
                "character": "friend-name",
                "image_file_path": "../../textures/LostFriend.png",
                "dialogue": "Hey Sage, I have this crazy new idea for a game... Do you want to develop it with me?",
@@ -12,7 +12,7 @@
                "response2": "Let's do it"
             },
             {
-               "depth": 0,
+               "depth": -1,
                "character": "Backstory",
                "image_file_path": "../../textures/MainChar.png",
                "dialogue": "You and 'friend-name' spend the next two months developing an intricate video game world in virtual reality...",
@@ -20,7 +20,7 @@
                "response2": ""
             },
             {
-               "depth": 0,
+               "depth": -1,
                "character": "friend-name",
                "image_file_path": "../../textures/LostFriend.png",
                "dialogue": "Check out this new feature I added. I'm telling you, VR is the future of gaming.",
@@ -28,7 +28,7 @@
                "response2": "How does it work?"
             },
             {
-               "depth": 0,
+               "depth": -1,
                "character": "friend-name",
                "image_file_path": "../../textures/MainChar.png",
                "dialogue": "Something's wrong...",
@@ -36,7 +36,7 @@
                "response2": "What's happening?"
             },
             {
-               "depth": 0,
+               "depth": -1,
                "character": "Backstory",
                "image_file_path": "../../textures/MainChar.png",
                "dialogue": "Your game's system malfunctions, trapping you and 'friend-name' in the world of the game.",
@@ -44,7 +44,7 @@
                "response2": ""
             },
             {
-               "depth": 0,
+               "depth": -1,
                "character": "Backstory",
                "image_file_path": "../../textures/MainChar.png",
                "dialogue": "'friend-name' exists in the game as one of the characters you created. To get home you must identify them without appearing suspicious to the other NPCs in the game...",
@@ -53,13 +53,49 @@
             }
          ]
       },
-      "town": {
+      "Town": {
          "bgImage": "../../backgrounds/town.jpg",
          "cards": [
             {
+               "depth": 0,
+               "character": "char1",
+               "dialogue": "Character 1, Scenario 1",
+               "response1": "Yes",
+               "response2": "No",
+               "isEndCard": 
+            },
+            {
+               "depth": 0,
+               "character": "char1",
+               "dialogue": "Character 1, Scenario 2",
+               "response1": "Yes",
+               "response2": "No"
+            },
+            {
+               "depth": 0,
+               "character": "char2",
+               "dialogue": "Character 2, Scenario 1",
+               "response1": "Yes",
+               "response2": "No"
+            },
+            {
                "depth": 1,
-               "character": "Shopkeeper Dwight",
-               "dialogue": "Can I interest you in some freshly picked blackberries?",
+               "character": "char2",
+               "dialogue": "Character 2, Scenario 2",
+               "response1": "Yes",
+               "response2": "No"
+            },
+            {
+               "depth": 0,
+               "character": "char3",
+               "dialogue": "Character 3, Scenario 1",
+               "response1": "Yes",
+               "response2": "No"
+            },
+            {
+               "depth": 1,
+               "character": "char3",
+               "dialogue": "Character 3, Scenario 2",
                "response1": "Yes",
                "response2": "No"
             }
@@ -69,8 +105,8 @@
          "bgImage": "../../backgrounds/Ocean.jpg",
          "cards": [
             {
-               "depth": 1,
-               "character": "Mermaid Leila",
+               "depth": 0,
+               "character": "char2",
                "dialogue": "......",
                "response1": "Yes",
                "response2": "No"

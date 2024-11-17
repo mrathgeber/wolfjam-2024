@@ -12,6 +12,7 @@ import Deck from './CardDeck/CardDeck.js';
 import { initBg } from './Location/location.js';
 
 import cards from './CardDeck/cards.json' assert { type: 'json' };
+import locations from '../background.json' assert { type: 'json' };
 
 (async () => {
   const app = new PIXI.Application();
@@ -91,13 +92,20 @@ import cards from './CardDeck/cards.json' assert { type: 'json' };
     
     const CardDeck = Deck.initCardDeck();
     app.stage.addChild(CardDeck);
-    
-    let deckSize = 60;
-    startCardDeck(deckSize, app, CardDeck);
+    const characterLevels = new Map()
+      .set('char1', 0)
+      .set('char2', 0)
+      .set('char3', 0)
+
+    await playBackstory(app, CardDeck);
+
+    // startCardDeck(app, CardDeck);
+    gameLoop(app, CardDeck, characterLevels, 0);
+
   });
 })();
 
-async function startCardDeck(deckSize, app, CardDeck) {
+async function playBackstory(app, CardDeck) {
   CardDeck.visible = true;
   // let deck_name = "";
   
@@ -111,3 +119,34 @@ async function startCardDeck(deckSize, app, CardDeck) {
   }
   
 }
+
+async function gameLoop(app, CardDeck, characterLevels, locationID) {
+  let gameOver = false;
+  while (!gameOver) {
+    const location = locations.Backgrounds[locationID].BgName;
+    let availableCards = [];
+    for (const [key, value] of characterLevels) {
+      const availableCharacterCards = cards.locations[location].cards.filter(card => card.character === key && card.depth === value);
+      availableCards.push(...availableCharacterCards);
+    }
+    console.log(availableCards);
+    const cardToPlay = availableCards[Math.floor(Math.random() * availableCards.length)];
+    const card = await Deck.initCard(app, cardToPlay);
+    CardDeck.addChild(card);
+    gameOver = true;
+  }
+}
+
+// async function startCardDeck(app, CardDeck) {
+//   CardDeck.visible = true;
+//   let deck_name = "";
+
+//   const backstoryImage = cards.locations.backstory.bgImage;
+//   const backstoryCards = cards.locations.backstory.cards;
+
+//   for (let i = 0; i < backstoryCards.length; i++) {
+//     const backstoryCard = backstoryCards[backstoryCards.length - 1 - i];
+//     const card = await Deck.initCard(app, backstoryCard.dialogue);
+//     CardDeck.addChild(card);
+//   }
+// }
