@@ -30,14 +30,12 @@ const Deck = {
       overlay.visible = false;
       app.stage.addChild(overlay);
 
-      const content = new PIXI.Text({text: dialogue, style: {fontSize: 12, fill: 0x0000FF, wordWrap: true, wordWrapWidth: 200, }});
-     
-      
+      const content = new PIXI.Text({ text: dialogue, style: { fontSize: 12, fill: 0x0000FF, wordWrap: true, wordWrapWidth: 200, } });
+
+
       content.x = app.screen.width / 2 - content.width / 2;
       content.y = app.screen.height / 2 - content.height / 2 - 150;
       card.addChild(content);
-      
-
 
       await PIXI.Assets.load('../../textures/char1.png');
       const character = PIXI.Sprite.from('../../textures/char1.png');
@@ -71,9 +69,9 @@ const Deck = {
          //ensures that overlay is not covering current card
          app.stage.addChild(overlay);
          app.stage.addChild(card);
-         
-         app.stage.setChildIndex(overlay, app.stage.children.length - 2); 
-         app.stage.setChildIndex(card, app.stage.children.length - 1); 
+
+         app.stage.setChildIndex(overlay, app.stage.children.length - 2);
+         app.stage.setChildIndex(card, app.stage.children.length - 1);
       });
       card.on('pointermove', (event) => {
          if (!isDragging) return;
@@ -84,59 +82,80 @@ const Deck = {
          const direction = card.x > 0 ? 1 : -1;
 
          if (Math.abs(card.x) > 50) {
-            const childGraphic = card.getChildByLabel("decision");
+            let childGraphic;
+            let childGraphic1 = card.getChildByLabel("1");
+            let childGraphic2 = card.getChildByLabel("-1");
+            if (childGraphic1 === null) {
+               childGraphic = childGraphic2;
+            } else {
+               childGraphic = childGraphic1;
+            }
             const childText = card.getChildByLabel("text");
-            if (childGraphic !== "null") {
+
+            if (childText === null || (childText !== null && childGraphic.label != direction.toString())) {
                card.removeChild(childGraphic);
                card.removeChild(childText);
-            }
 
-            const overlayBG = new PIXI.Graphics();
+               const overlayBG = new PIXI.Graphics();
 
-            overlayBG.label = "decision";
-            let x = app.screen.width / 2 - cardWidth / 2;
-            let y = app.screen.height / 2 - cardHeight + 200;
-            let width = 30;
-            let height = cardHeight;
-            let radius = 20
-            // if (decision > 0) {
-            overlayBG.moveTo(x + 20, y);
-            overlayBG.arcTo(x + cardWidth, y, x + cardWidth, y + 20, 20);
-            overlayBG.lineTo(x + width, y + height);
-            overlayBG.lineTo(x, y + height);
-            overlayBG.lineTo(x, y + radius);
-            overlayBG.arcTo(x, y, x + radius, y, radius);
-            // } else {
-               
-            // }
-
-
-
-            overlayBG.fill("black");
-            overlayBG.alpha = 0.1;
-            card.addChild(overlayBG);
-
-
-            const overlayText = new PIXI.Text({
-               text: direction > 0 ? "Yes" : "No",
-               style:
-               {
-                  fontSize: 20,
-                  fill: 0x000000,
-                  align: 'center',
-                  fontWeight: 'bold',
+               overlayBG.label = direction > 0 ? "1" : "-1";
+               let x = app.screen.width / 2 - cardWidth / 2;
+               let y = app.screen.height / 2 - cardHeight + 200;
+               let width = 30;
+               let height = cardHeight;
+               let radius = 20
+               if (direction > 0) {
+                  overlayBG.moveTo(x + cardWidth - 40, y);
+                  overlayBG.arcTo(x + cardWidth, y, x + cardWidth, y + 20, 20);
+                  overlayBG.lineTo(x + cardWidth, y + height - 20);
+                  overlayBG.arcTo(x + cardWidth, y + height, x + cardWidth - 20, y + height, 20);
+                  overlayBG.lineTo(x + cardWidth - 40, y + height);
+               } else {
+                  overlayBG.moveTo(x + 40, y);
+                  overlayBG.arcTo(x, y, x, y + 20, 20);
+                  overlayBG.lineTo(x, y + height - 20);
+                  overlayBG.arcTo(x, y + height, x + 20, y + height, 20);
+                  overlayBG.lineTo(x + 40, y + height);
                }
-            });
 
-            overlayText.label = "text";
+               overlayBG.fill("black");
+               overlayBG.alpha = 0;
+               card.addChild(overlayBG);
 
-            if (direction > 0) {
-               overlayText.x = app.screen.width / 2 + width / 2 - 45;
-            } else {
-               overlayText.x = app.screen.width / 2 - width / 2 + 10;
+               const ticker = new PIXI.Ticker();
+               ticker.add(() => {
+                  if (overlayBG.alpha < 0.1) {
+                     overlayBG.alpha += 0.003;
+                  } else {
+                     ticker.stop();
+                  }
+               });
+               ticker.start();
+
+               const overlayText = new PIXI.Text({
+                  text: direction > 0 ? "Yes" : "No",
+                  style:
+                  {
+                     fontSize: 40,
+                     fill: 0xffffff,
+                     align: 'center',
+                  }
+               });
+
+               overlayText.label = "text";
+
+               if (direction > 0) {
+                  overlayText.angle += 90;
+                  overlayText.x = app.screen.width / 2 + cardWidth / 2;
+                  overlayText.y = app.screen.height / 2 - overlayText.width / 2;
+               } else {
+                  overlayText.angle -= 90;
+                  overlayText.x = app.screen.width / 2 - cardWidth / 2;
+                  overlayText.y = app.screen.height / 2 + 20;
+               }
+               
+               card.addChild(overlayText);
             }
-            overlayText.y = app.screen.height / 2 - height * 2 + 10;
-            card.addChild(overlayText);
          }
       });
 
@@ -184,7 +203,14 @@ const Deck = {
       });
    },
    animateResetPosition(app, card) {
-      const childGraphic = card.getChildByLabel("decision");
+      let childGraphic;
+      let childGraphic1 = card.getChildByLabel("1");
+      let childGraphic2 = card.getChildByLabel("-1");
+      if (childGraphic1 === null) {
+         childGraphic = childGraphic2;
+      } else {
+         childGraphic = childGraphic1;
+      }
       const childText = card.getChildByLabel("text");
       if (childGraphic !== "null") {
          card.removeChild(childGraphic);
