@@ -31,7 +31,7 @@ const Deck = {
       overlay.visible = false;
       app.stage.addChild(overlay);
 
-      const content = new PIXI.Text({ text: cardInfo.dialogue, style: { fontSize: 12, fill: 0x0000FF, wordWrap: true, wordWrapWidth: 200, align: "center" } });
+      const content = new PIXI.Text({ text: cardInfo.dialogue, style: { fontSize: 12, fill: 0x000000, wordWrap: true, wordWrapWidth: 200, align: "center" } });
 
       content.x = app.screen.width / 2 - content.width / 2;
       content.y = app.screen.height / 2 - content.height / 2 - 150;
@@ -210,8 +210,8 @@ const Deck = {
          let choice;
          if (direction < 0) {
             choice = card.response1;
+            console.log(characterLevels);
             characterLevels[card.character]++;
-            card.depth++;
          }
          else {
             choice = card.response2;
