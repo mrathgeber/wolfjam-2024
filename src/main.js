@@ -69,30 +69,29 @@ import locations from '../background.json' assert { type: 'json' };
 
   // const CardDeck = Deck.initCardDeck();
   // app.stage.addChild(CardDeck);
-
+  
   // let deckSize = 60;
   // startCardDeck(deckSize, app, CardDeck);
-
+  
   /* ---------- Start Game Mouse Events ---------- */
-
+  
   playButtonContainer.interactive = true;
-
+  
   playButtonContainer.on('pointerover', () => {
     app.canvas.style.cursor = 'pointer';
   });
-
+  
   playButtonContainer.on('pointerout', () => {
     app.canvas.style.cursor = 'default';
   });
-
+  
   playButtonContainer.on('pointerdown', async () => {
     app.stage.removeChild(StartContainer);
-
+    
     await initBg(app, 0);
-
+    
     const CardDeck = Deck.initCardDeck();
     app.stage.addChild(CardDeck);
-
     const characterLevels = new Map()
       .set('char1', 0)
       .set('char2', 0)
@@ -102,19 +101,23 @@ import locations from '../background.json' assert { type: 'json' };
 
     // startCardDeck(app, CardDeck);
     gameLoop(app, CardDeck, characterLevels, 0);
+
   });
 })();
 
 async function playBackstory(app, CardDeck) {
   CardDeck.visible = true;
-
+  // let deck_name = "";
+  
+  const backstoryImage = cards.locations.backstory.bgImage;
   const backstoryCards = cards.locations.backstory.cards;
-
+  
   for (let i = 0; i < backstoryCards.length; i++) {
     const backstoryCard = backstoryCards[backstoryCards.length - 1 - i];
     const card = await Deck.initCard(app, backstoryCard);
     CardDeck.addChild(card);
   }
+  
 }
 
 async function gameLoop(app, CardDeck, characterLevels, locationID) {

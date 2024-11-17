@@ -1,20 +1,20 @@
 {
    "locations": {
       "backstory": {
-         "bgImage": "../../backgrounds/town.jpg",
+         "bgImage": "../../backgrounds/Classroom.jpg",
          "cards": [
             {
                "depth": -1,
                "character": "friend-name",
-               "image_file_path": "../../textures/char1.png",
-               "dialogue": "Hey 'player-name', I have this crazy new idea for a game... Do you want to develop it with me?",
+               "image_file_path": "../../textures/LostFriend.png",
+               "dialogue": "Hey Sage, I have this crazy new idea for a game... Do you want to develop it with me?",
                "response1": "I'm down bro",
                "response2": "Let's do it"
             },
             {
                "depth": -1,
                "character": "Backstory",
-               "image_file_path": "../../textures/char1.png",
+               "image_file_path": "../../textures/MainChar.png",
                "dialogue": "You and 'friend-name' spend the next two months developing an intricate video game world in virtual reality...",
                "response1": "",
                "response2": ""
@@ -22,7 +22,7 @@
             {
                "depth": -1,
                "character": "friend-name",
-               "image_file_path": "../../textures/char1.png",
+               "image_file_path": "../../textures/LostFriend.png",
                "dialogue": "Check out this new feature I added. I'm telling you, VR is the future of gaming.",
                "response1": "Cool",
                "response2": "How does it work?"
@@ -30,7 +30,7 @@
             {
                "depth": -1,
                "character": "friend-name",
-               "image_file_path": "../../textures/char1.png",
+               "image_file_path": "../../textures/MainChar.png",
                "dialogue": "Something's wrong...",
                "response1": "...",
                "response2": "What's happening?"
@@ -38,7 +38,7 @@
             {
                "depth": -1,
                "character": "Backstory",
-               "image_file_path": "../../textures/char1.png",
+               "image_file_path": "../../textures/MainChar.png",
                "dialogue": "Your game's system malfunctions, trapping you and 'friend-name' in the world of the game.",
                "response1": "",
                "response2": ""
@@ -46,7 +46,7 @@
             {
                "depth": -1,
                "character": "Backstory",
-               "image_file_path": "../../textures/char1.png",
+               "image_file_path": "../../textures/MainChar.png",
                "dialogue": "'friend-name' exists in the game as one of the characters you created. To get home you must identify them without appearing suspicious to the other NPCs in the game...",
                "response1": "",
                "response2": ""
