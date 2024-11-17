@@ -8,7 +8,7 @@ const Deck = {
       return CardDeck;
    },
    //creates a card
-   async initCard(app, dialogue) {
+   async initCard(app, cardInfo) {
       const card = new PIXI.Container();
       const cardWidth = 300;
       const cardHeight = 400;
@@ -30,15 +30,15 @@ const Deck = {
       overlay.visible = false;
       app.stage.addChild(overlay);
 
-      const content = new PIXI.Text({ text: dialogue, style: { fontSize: 12, fill: 0x0000FF, wordWrap: true, wordWrapWidth: 200, } });
+      const content = new PIXI.Text({ text: cardInfo.dialogue, style: { fontSize: 12, fill: 0x0000FF, wordWrap: true, wordWrapWidth: 200, } });
 
 
       content.x = app.screen.width / 2 - content.width / 2;
       content.y = app.screen.height / 2 - content.height / 2 - 150;
       card.addChild(content);
 
-      await PIXI.Assets.load('../../textures/char1.png');
-      const character = PIXI.Sprite.from('../../textures/char1.png');
+      await PIXI.Assets.load(cardInfo.image_file_path);
+      const character = PIXI.Sprite.from(cardInfo.image_file_path);
       character.x = app.screen.width / 2 - character.width / 2;
       character.y = app.screen.height / 2 - character.height / 2;
       card.addChild(character);

@@ -106,7 +106,7 @@ async function startCardDeck(deckSize, app, CardDeck) {
   
   for (let i = 0; i < backstoryCards.length; i++) {
     const backstoryCard = backstoryCards[backstoryCards.length - 1 - i];
-    const card = await Deck.initCard(app, backstoryCard.dialogue);
+    const card = await Deck.initCard(app, backstoryCard);
     CardDeck.addChild(card);
   }
   
