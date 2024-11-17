@@ -49,8 +49,9 @@ import locations from '../background.json' assert { type: 'json' };
 
   /* ---------- Title Text ---------- */
 
-  const text = initTitleText(app, titleStyle);
-  StartContainer.addChild(text);
+  const texts = initTitleText(app, titleStyle);
+  StartContainer.addChild(texts[0]);
+  StartContainer.addChild(texts[1]);
 
   /* ---------- Play Button ---------- */
 
@@ -93,20 +94,16 @@ import locations from '../background.json' assert { type: 'json' };
     const CardDeck = Deck.initCardDeck();
     app.stage.addChild(CardDeck);
     const characterLevels = new Map()
-      .set('Scientist', 0)
+      .set('char1', 0)
       .set('char2', 0)
       .set('char3', 0)
 
-    await playBackstory(app, CardDeck);
-
-    if (app.stage)
-    {
-    gameLoop(app, CardDeck, characterLevels, 0);
-    }
+    await playBackstory(app, CardDeck, characterLevels);
+    gameLoop(app, CardDeck, characterLevels, 1);
   });
 })();
 
-async function playBackstory(app, CardDeck) {
+async function playBackstory(app, CardDeck, characterLevels) {
   CardDeck.visible = true;
   // let deck_name = "";
   
@@ -115,26 +112,26 @@ async function playBackstory(app, CardDeck) {
   
   for (let i = 0; i < backstoryCards.length; i++) {
     const backstoryCard = backstoryCards[backstoryCards.length - 1 - i];
-    const card = await Deck.initCard(app, backstoryCard);
-    CardDeck.addChild(card);
+    const card = await Deck.initCard(app, backstoryCard, characterLevels, CardDeck);
+    // CardDeck.addChild(card);
   }
-  
 }
 
 async function gameLoop(app, CardDeck, characterLevels, locationID) {
-  let gameOver = false;
-  while (!gameOver) {
+  let gameOver = 0;
+  while (gameOver != 2) {
     const location = locations.Backgrounds[locationID].BgName;
     let availableCards = [];
     for (const [key, value] of characterLevels) {
+      console.log(cards);
       const availableCharacterCards = cards.locations[location].cards.filter(card => card.character === key && card.depth === value);
       availableCards.push(...availableCharacterCards);
     }
     console.log(availableCards);
     const cardToPlay = availableCards[Math.floor(Math.random() * availableCards.length)];
-    const card = await Deck.initCard(app, cardToPlay);
-    CardDeck.addChild(card);
-    gameOver = true;
+    const card = await Deck.initCard(app, cardToPlay, characterLevels, CardDeck);
+    // CardDeck.addChild(card);
+    gameOver++;
   }
 }
 

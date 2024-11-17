@@ -9,7 +9,7 @@ const Deck = {
    },
    //creates a card
   
-   async initCard(app, cardInfo) {
+   async initCard(app, cardInfo, characterLevels, CardDeck) {
       const card = new PIXI.Container();
       const cardWidth = 300;
       const cardHeight = 400;
@@ -31,7 +31,7 @@ const Deck = {
       overlay.visible = false;
       app.stage.addChild(overlay);
 
-      const content = new PIXI.Text({ text: cardInfo.dialogue, style: { fontSize: 12, fill: 0x0000FF, wordWrap: true, wordWrapWidth: 200, } });
+      const content = new PIXI.Text({ text: cardInfo.dialogue, style: { fontSize: 12, fill: 0x0000FF, wordWrap: true, wordWrapWidth: 200, align: "center" } });
 
       content.x = app.screen.width / 2 - content.width / 2;
       content.y = app.screen.height / 2 - content.height / 2 - 150;
@@ -133,7 +133,7 @@ const Deck = {
                ticker.start();
 
                const overlayText = new PIXI.Text({
-                  text: direction > 0 ? "Yes" : "No",
+                  text: direction < 0 ? "Yes" : "No",
                   style:
                   {
                      fontSize: 40,
@@ -159,24 +159,30 @@ const Deck = {
          }
       });
 
-      // Pointer up event
-      card.on('pointerup', (event) => {
-         isDragging = false;
+      CardDeck.addChild(card);
 
-         // Determine swipe direction and animate
-         if (Math.abs(card.x) > 150) {
-            // Swipe left or right
-            const direction = card.x > 0 ? 1 : -1;
-            Deck.animateSwipeOff(app, card, direction, overlay);
-         } else {
-            // Return to center if swipe wasn't strong enough
-            Deck.animateResetPosition(app, card);
-         }
+      // Pointer up event
+      return new Promise((resolve) => {
+         card.on('pointerup', (event) => {
+            isDragging = false;
+   
+            // Determine swipe direction and animate
+            if (Math.abs(card.x) > 150) {
+               // Swipe left or right
+               const direction = card.x > 0 ? 1 : -1;
+               Deck.animateSwipeOff(app, card, direction, overlay, characterLevels);
+               resolve(card);
+            } else {
+               // Return to center if swipe wasn't strong enough
+               Deck.animateResetPosition(app, card);
+               // resolve(card);
+            }
+         });
       });
 
       return card;
    },
-   animateSwipeOff(app, card, direction, overlay) {
+   animateSwipeOff(app, card, direction, overlay, characterLevels) {
       const targetX = direction > 0 ? app.screen.width + card.width : app.screen.width - card.width;
       const targetRotation = direction > 0 ? 0.3 : -0.3; // Tilt angle (in radians)
       const swipeSpeed = 10;
@@ -200,6 +206,16 @@ const Deck = {
             // Optionally, create a new card or trigger an event here
          }
 
+         //update characterLevels
+         let choice;
+         if (direction < 0) {
+            choice = card.response1;
+            characterLevels[card.character]++;
+            card.depth++;
+         }
+         else {
+            choice = card.response2;
+         }
       });
    },
    animateResetPosition(app, card) {
