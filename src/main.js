@@ -111,7 +111,7 @@ async function playBackstory(app, CardDeck, characterLevels) {
   const backstoryCards = cards.locations.backstory.cards;
   
   for (let i = 0; i < backstoryCards.length; i++) {
-    const backstoryCard = backstoryCards[backstoryCards.length - 1 - i];
+    const backstoryCard = backstoryCards[i];
     const card = await Deck.initCard(app, backstoryCard, characterLevels, CardDeck);
     // CardDeck.addChild(card);
   }
