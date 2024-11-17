@@ -61,7 +61,8 @@
                "character": "char1",
                "dialogue": "Character 1, Scenario 1",
                "response1": "Yes",
-               "response2": "No"
+               "response2": "No",
+               "isEndCard": 
             },
             {
                "depth": 0,
