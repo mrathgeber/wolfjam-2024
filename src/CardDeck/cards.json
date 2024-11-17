@@ -49,7 +49,8 @@
                "image_file_path": "../../textures/MainChar.png",
                "dialogue": "'friend-name' exists in the game as one of the characters you created. To get home you must identify them without appearing suspicious to the other NPCs in the game...",
                "response1": "",
-               "response2": ""
+               "response2": "",
+               "end": "true"
             }
          ]
       },
@@ -62,7 +63,7 @@
                "dialogue": "Character 1, Scenario 1",
                "response1": "Yes",
                "response2": "No",
-               "isEndCard": 
+               "isEndCard": "No"
             },
             {
                "depth": 0,

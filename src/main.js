@@ -93,15 +93,16 @@ import locations from '../background.json' assert { type: 'json' };
     const CardDeck = Deck.initCardDeck();
     app.stage.addChild(CardDeck);
     const characterLevels = new Map()
-      .set('char1', 0)
+      .set('Scientist', 0)
       .set('char2', 0)
       .set('char3', 0)
 
     await playBackstory(app, CardDeck);
 
-    // startCardDeck(app, CardDeck);
+    if (app.stage)
+    {
     gameLoop(app, CardDeck, characterLevels, 0);
-
+    }
   });
 })();
 

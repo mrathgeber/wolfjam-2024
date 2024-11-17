@@ -33,7 +33,6 @@ const Deck = {
 
       const content = new PIXI.Text({ text: cardInfo.dialogue, style: { fontSize: 12, fill: 0x0000FF, wordWrap: true, wordWrapWidth: 200, } });
 
-
       content.x = app.screen.width / 2 - content.width / 2;
       content.y = app.screen.height / 2 - content.height / 2 - 150;
       card.addChild(content);
